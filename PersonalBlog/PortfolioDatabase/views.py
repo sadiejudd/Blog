@@ -8,7 +8,7 @@ def home(request):
 def hobbies(request):
     return
 
-def porfolio(request):
+def portfolio(request):
     return
 
 def contact(request):

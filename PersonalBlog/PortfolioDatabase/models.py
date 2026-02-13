@@ -10,5 +10,12 @@ class Hobby(models.Model):
     def __str__(self):
         return self.hobby_name
     
+class Portfolio(models.Model):
+    port_name = models.CharField()
+    port_desc = models.TextField()
+
+    def __str__(self):
+        return self.port_name
+    
 
 
