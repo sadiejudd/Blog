@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Hobby
+from .models import Portfolio
 
 # Create your views here.
 def home(request):
@@ -14,14 +15,18 @@ def hobbies(request):
     hobbies = Hobby.objects.all()
     output = ""
     for hobby in hobbies:
-        output+= f"{hobby.hobby_name}: {hobby.hobby_desc}\n"
+        output+= f"{hobby.hobby_name}: {hobby.hobby_desc}<br></br>"
     return HttpResponse(output)
 
     
 
 
 def portfolio(request):
-    return
+    portfolio = Portfolio.objects.all()
+    output = ""
+    for port in portfolio:
+        output += f"{port.port_name}: {port.port_desc}<br></br>"
+    return HttpResponse(output)
 
 def contact(request):
     return HttpResponse("Student Email: sadiejudd@mail.weber.edu")
