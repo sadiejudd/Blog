@@ -1,22 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Hobby
 from .models import Portfolio
+from django.template import loader
+
 
 # Create your views here.
 def home(request):
-    return HttpResponse("""<strong>Welcome!</strong> 
-    My name is Sadie Judd. I am a Computer Science student at Weber State University.
-    I spend a lot of time studying and working, but I also like spending time with friends and family,
-    playing with my dog, and spening time outdoors.""")
+  template = loader.get_template('PortfolioDatabase/index.html')
+  return HttpResponse(template.render({}, request))
    
 
 def hobbies(request):
     hobbies = Hobby.objects.all()
-    output = ""
-    for hobby in hobbies:
-        output+= f"{hobby.hobby_name}: {hobby.hobby_desc}<br></br>"
-    return HttpResponse(output)
+    template = loader.get_template('PortfolioDatabase/hobby.html')
+    context = {
+        'hobbies': hobbies
+    }
+    return HttpResponse(template.render(context, request))
+    
 
     
 
@@ -31,3 +33,11 @@ def portfolio(request):
 def contact(request):
     return HttpResponse("Student Email: sadiejudd@mail.weber.edu")
 
+def hobby_details(request, id):
+    hobby = get_object_or_404(Hobby, id = id)
+    template = loader.get_template('PortfolioDatabase/hobby_details.html')
+    context = {
+        "hobby": hobby
+    }
+    return HttpResponse(template.render(context, request))
+    
