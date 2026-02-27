@@ -24,14 +24,16 @@ def hobbies(request):
 
 
 def portfolio(request):
-    portfolio = Portfolio.objects.all()
-    output = ""
-    for port in portfolio:
-        output += f"{port.port_name}: {port.port_desc}<br></br>"
-    return HttpResponse(output)
+   portfolio = Portfolio.objects.all()
+   template = loader.get_template('PortfolioDatabase/portfolio.html')
+   context = {
+       'portfolio': portfolio
+   }
+   return HttpResponse(template.render(context, request))
 
 def contact(request):
-    return HttpResponse("Student Email: sadiejudd@mail.weber.edu")
+    template = loader.get_template('PortfolioDatabase/contact.html')
+    return HttpResponse(template.render({}, request))
 
 def hobby_details(request, id):
     hobby = get_object_or_404(Hobby, id = id)
@@ -40,4 +42,13 @@ def hobby_details(request, id):
         "hobby": hobby
     }
     return HttpResponse(template.render(context, request))
+
+def port_details(request, id):
+    portfolio = get_object_or_404(Portfolio, id = id)
+    template = loader.get_template('PortfolioDatabase/port_details.html')
+    context = {
+        'portfolio': portfolio
+    }
+    return HttpResponse(template.render(context, request))
+    
     

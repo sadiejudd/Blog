@@ -1,0 +1,12 @@
+{% extends "PortfolioDatabase/base.html" %}
+
+{% block body %}
+<div class = "d-flex align-items-start gap-3 my-4">
+<img src = "{{portfolio.port_image}}" class = "img-thumbnail" style = "width: 400px;">
+<div>
+<h2>{{portfolio.port_name}}</h2>
+<p>{{portfolio.port_desc}}</p>
+</div>
+
+
+{% endblock %}

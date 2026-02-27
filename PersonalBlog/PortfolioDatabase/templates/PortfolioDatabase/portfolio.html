@@ -1,0 +1,22 @@
+{% extends "PortfolioDatabase/base.html" %}
+
+{% block body %}
+<h2>Hobbies</h2>
+
+<ul class = "list-unstyled row row-cols-2 row-cols-md-3 g-4">
+{% for port in portfolio %}
+<li class = "col">
+<div class = "card h-100">
+<h3>{{port.port_name}}</h3>
+<a href = "{{port.id}}"><img src = "{{port.port_image}}" width = "250px" class="card-img-top"></a>
+</div>
+
+
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% endblock %}
